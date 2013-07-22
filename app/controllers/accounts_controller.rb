@@ -95,7 +95,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     pp current_user.id
     pp @account
-    unless current_user.id == @account.owner
+    unless current_user == @account.owner
       redirect_to '/oops'
       valid = false
     end
