@@ -1,0 +1,22 @@
+<h1>Our Customers</h1>
+
+<% if is_root_domain? %>
+  <% if user_signed_in? %>
+    <%= link_to "Go To My Site", root_url(subdomain: current_user.account.subdomain) %>
+  <% end %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+<% @accounts.each do |acct| %>
+  <tr>
+    <td><%= acct.subdomain %></td>
+    <td><%= link_to "Visit!", root_url(subdomain: acct.subdomain) %></td>
+  </tr>
+<% end %>
+</table>
