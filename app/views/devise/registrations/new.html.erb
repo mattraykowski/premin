@@ -8,7 +8,7 @@ else %>
     <%= devise_error_messages! %>
 
     <% if current_account %>
-      <%= f.hidden_field :account_name, value: current_account.name %>
+      <%= f.hidden_field :account_name, value: current_account.subdomain %>
       <%= f.hidden_field :account_id, value: current_account.id %>
     <% else %>
       <div><%= f.label :account %><br />
