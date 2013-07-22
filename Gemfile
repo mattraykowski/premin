@@ -22,6 +22,9 @@ group :development, :test do
   gem "webrat"
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "meta_request"
 end
 
 
