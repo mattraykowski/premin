@@ -7,4 +7,7 @@ class HomeController < ApplicationController
   def customers
     @accounts = Account.all
   end
+
+  def oops
+  end
 end

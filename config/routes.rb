@@ -4,6 +4,8 @@ Premin::Application.routes.draw do
   devise_for :users
 
   get "home/index"
+  match "/customers" => "home#customers"
+  match "/oops" => "home#oops"
 
   constraints(Subdomain) do
     match "/" => "dashboard#index"

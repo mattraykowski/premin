@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
 
   VALID_SUBDOMAIN_FORMAT = /^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$/i
   validates :subdomain, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_SUBDOMAIN_FORMAT }
+  validates :name, presence: true
 
   CAN_SIGN_UP = Rails.application.config.allow_account_sign_up
 end

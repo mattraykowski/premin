@@ -9,6 +9,7 @@ describe Account do
   it { should respond_to(:users) }
   it { should respond_to(:owner) }
   it { should respond_to(:subdomain) }
+  it { should respond_to(:name) }
 
   describe "when subdomain is not present" do
     before { @account.subdomain = " " }
@@ -42,5 +43,11 @@ describe Account do
       end 
     end
   end
+
+  describe "when name is not present" do
+    before { @account.name = " " }
+    it { should_not be_valid }
+  end
+
     
 end

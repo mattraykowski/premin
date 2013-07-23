@@ -27,12 +27,13 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   # GET /accounts/new.json
   def new
-    @account = Account.new
+    #@account = Account.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @account }
-    end
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #  format.json { render json: @account }
+    #end
+    redirect_to '/oops'
   end
 
   # GET /accounts/1/edit
@@ -43,17 +44,18 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(params[:account])
+    #@account = Account.new(params[:account])
 
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render json: @account, status: :created, location: @account }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
+    #respond_to do |format|
+    #  if @account.save
+    #    format.html { redirect_to @account, notice: 'Account was successfully created.' }
+    #    format.json { render json: @account, status: :created, location: @account }
+    #  else
+    #    format.html { render action: "new" }
+    #    format.json { render json: @account.errors, status: :unprocessable_entity }
+    #  end
+    #end
+    redirect_to '/oops'
   end
 
   # PUT /accounts/1
@@ -75,13 +77,14 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @account = Account.find(params[:id])
-    @account.destroy
+    #@account = Account.find(params[:id])
+    #@account.destroy
 
-    respond_to do |format|
-      format.html { redirect_to accounts_url }
-      format.json { head :no_content }
-    end
+    #respond_to do |format|
+    #  format.html { redirect_to accounts_url }
+    #  format.json { head :no_content }
+    #end
+    redirect_to '/oops'
   end
 
   def verify_owner!
@@ -93,8 +96,6 @@ class AccountsController < ApplicationController
     end
 
     @account = Account.find(params[:id])
-    pp current_user.id
-    pp @account
     unless current_user == @account.owner
       redirect_to '/oops'
       valid = false

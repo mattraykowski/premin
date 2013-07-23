@@ -51,13 +51,13 @@ describe User do
       end
 
       it "should not create a new account" do
-        expect{FactoryGirl.create(:user2, account_name: @existing_account.subdomain)}.not_to change{Account.count}
+        expect{FactoryGirl.create(:user2, account_subdomain: @existing_account.subdomain, account_name: @existing_account.subdomain)}.not_to change{Account.count}
       end
     end
 
     describe "when account does not exist" do
       it "should create a new account" do
-        expect{FactoryGirl.create(:user2, account_name: "somerandomname")}.to change{Account.count}
+        expect{FactoryGirl.create(:user2, account_subdomain: "somerandomname", account_name: "randomname")}.to change{Account.count}
       end
     end
 
