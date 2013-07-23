@@ -4,10 +4,20 @@ class HomeController < ApplicationController
   def index
   end
 
+  def oops
+  end
+
+  def about
+  end
+
+  def contact
+  end
+
   def customers
     @accounts = Account.all
   end
 
-  def oops
+  def news
   end
+
 end

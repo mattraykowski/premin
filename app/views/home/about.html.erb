@@ -1,0 +1,7 @@
+<% if is_root_domain? %>
+  <% if user_signed_in? %>
+    <div class="alert alert-success">
+      Click <strong><%= link_to "here", root_url(subdomain: current_user.account.subdomain) %></strong> to go to your school's site.
+    </div>
+  <% end %>
+<% end %>

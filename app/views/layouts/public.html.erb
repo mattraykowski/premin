@@ -27,9 +27,9 @@
         <ul class="nav pull-left">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "News", root_path %></li>
-          <li><%= link_to "About Us", root_path %></li>
+          <li><%= link_to "About Us", about_path %></li>
           <li><%= link_to "Our Customers", customers_path %></li>
-          <li><%= link_to "Contact Us", root_path %></li>
+          <li><%= link_to "Contact Us", contact_path %></li>
         </ul>
         <ul class="nav pull-right">
             <% if user_signed_in? %>
