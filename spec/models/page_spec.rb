@@ -53,4 +53,18 @@ describe Page do
       Page.by_account(@page1.account).should_not include(@page2)
     end
   end
+
+  describe "sidebars" do
+    before(:each) do
+      @page1 = FactoryGirl.create(:page, sidebar: true)
+      @page2 = FactoryGirl.create(:page, sidebar: false)
+    end
+
+    it "should include sidebar pages" do
+      Page.sidebars.should include(@page1)
+    end
+    it "should not include non-sidebar pages" do
+      Page.sidebars.should_not include(@page2)
+    end
+  end
 end

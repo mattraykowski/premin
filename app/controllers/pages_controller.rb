@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_filter :requires_current_account
+  before_filter :sidebar_pages
   # GET /pages
   # GET /pages.json
   def index
@@ -81,5 +82,9 @@ class PagesController < ApplicationController
       format.html { redirect_to pages_url }
       format.json { head :no_content }
     end
+  end
+
+  def sidebar_pages
+    @sidebar_pages = Page.by_account(@current_account).sidebars
   end
 end

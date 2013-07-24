@@ -6,4 +6,5 @@ class Page < ActiveRecord::Base
   validates :title, presence: true
 
   scope :by_account, lambda { |acct| where("pages.account_id = ?", acct.id) }
+  scope :sidebars, -> { where(sidebar: true) }
 end
