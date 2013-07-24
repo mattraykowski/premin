@@ -43,6 +43,9 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
+gem 'redactor-rails'
+gem 'carrierwave'
+gem 'mini_magick'
 gem 'jquery-rails'
 gem 'devise'
 gem 'cancan'

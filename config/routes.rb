@@ -1,4 +1,6 @@
 Premin::Application.routes.draw do
+  mount RedactorRails::Engine => '/redactor_rails'
+
   get "dashboard/index"
 
   devise_for :users

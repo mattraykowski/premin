@@ -14,4 +14,5 @@
 //= require jquery_ujs
 // Loads all Bootstrap javascripts
 //= require bootstrap
+//= require redactor-rails
 //= require_tree .

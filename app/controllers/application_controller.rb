@@ -1,5 +1,3 @@
-include UrlHelper
-
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_account, :is_root_domain?, :can_sign_up?
