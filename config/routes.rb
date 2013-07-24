@@ -12,6 +12,7 @@ Premin::Application.routes.draw do
 
   constraints(Subdomain) do
     match "/" => "dashboard#index"
+    resources :pages
   end
 
   root :to => 'home#index'

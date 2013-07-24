@@ -35,4 +35,8 @@ module ControllerMacros
       sign_in @user_owning_account
     end
   end
+
+  def create_subdomain_path(subdomain,relative_path)
+    "http://#{subdomain}.test.com#{relative_path}"
+  end
 end

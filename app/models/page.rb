@@ -4,4 +4,6 @@ class Page < ActiveRecord::Base
 
   validates :content, presence: true
   validates :title, presence: true
+
+  scope :by_account, lambda { |acct| where("pages.account_id = ?", acct.id) }
 end

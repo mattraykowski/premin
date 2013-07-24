@@ -1,3 +1,5 @@
+include UrlHelper
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_account, :is_root_domain?, :can_sign_up?
@@ -36,5 +38,13 @@ class ApplicationController < ActionController::Base
   #    return false;
   #  end
   #end
+
+  def requires_current_account
+    if @current_account.nil?
+      flash.now[:notice] = "You must be logged in to a school to do that."
+      redirect_to customers_path
+    end 
+  end
+  
 
 end

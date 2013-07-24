@@ -36,4 +36,21 @@ describe Page do
     end
   end
 
+
+  describe "by_account" do
+    before(:each) do
+      @acct1 = FactoryGirl.create(:account)
+      @acct2 = FactoryGirl.create(:account, subdomain: @acct1.subdomain + "1")
+      @page1 = FactoryGirl.create(:page, account: @acct1)
+      @page2 = FactoryGirl.create(:page, account: @acct2)
+      @page1.save
+      @page2.save
+    end
+    it "includes pages by account" do
+      Page.by_account(@page1.account).should include(@page1)
+    end
+    it "excludes pages not in the account" do
+      Page.by_account(@page1.account).should_not include(@page2)
+    end
+  end
 end
