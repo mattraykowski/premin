@@ -20,13 +20,21 @@ class User < ActiveRecord::Base
               on:  :create
   validates :account_name, 
               presence: { message: "Account name must not be blank" }, 
-              on:  :create
+              on:  :create,
+              if: "account_by_subdomain.nil?"
 
   # Callbacks
   before_save { email.downcase! }
   before_validation :create_account, on: :create
   after_create :update_account_owner
 
+  def account_by_subdomain
+    if self.account_subdomain.blank?
+      nil
+    else
+      Account.find_by_subdomain(self.account_subdomain)
+    end
+  end
 
   # Create an account on creating a new user.
   # If the 'account_name' does not exist process it as a sign up.
