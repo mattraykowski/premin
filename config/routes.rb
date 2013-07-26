@@ -13,7 +13,10 @@ Premin::Application.routes.draw do
   match "/news" => "home#news"
 
   constraints(Subdomain) do
-    match "/" => "dashboard#index"
+    authenticated :user do
+      match "/" => "dashboard#index"
+    end
+    match "/" => "dashboard#public"
     resources :pages
   end
 

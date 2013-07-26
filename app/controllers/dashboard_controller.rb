@@ -8,4 +8,12 @@ class DashboardController < ApplicationController
       format.json { render json: @pages }
     end
   end
+
+  def public
+    @pages = Page.by_account(@current_account).sidebars
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @pages }
+    end
+  end
 end
