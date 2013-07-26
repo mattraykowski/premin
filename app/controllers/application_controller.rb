@@ -44,5 +44,12 @@ class ApplicationController < ActionController::Base
     end 
   end
   
+  def requires_site_admin
+    if user_signed_in? && current_user.account == @current_account && current_user.is_site_admin
+      return
+    end
 
+    flash.now[:alert] = "You do not have access to that page!"
+    redirect_to oops_path
+  end
 end

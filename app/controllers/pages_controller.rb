@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!, except: :show
   before_filter :requires_current_account
+  before_filter :requires_site_admin, except: [:index, :show]
   before_filter :sidebar_pages
 
   # index, show, edit, new, create, update, destroy
