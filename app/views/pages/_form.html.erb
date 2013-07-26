@@ -10,15 +10,30 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :sidebar %>
-  <%= f.check_box :sidebar %>
-  <%= f.label :content %>
-  <%= f.text_area :content, class: "redactor" %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row-fluid">
+    <div class="span3">
+      <fieldset>
+        <legend><%= f.label :title %></legend>
+        <%= f.text_field :title, class: "input-xlarge" %>
+        <label class="checkbox">
+          <%= f.check_box :sidebar %>
+          <%= f.label :sidebar %>
+        </label>
+        <div class="btn-group">
+          <%= f.submit class: "btn btn-success btn-small" %>
+          <% if buttons.include?(:show) %>
+            <%= link_to 'Show', @page, class: "btn btn-primary btn-small" %>
+          <% end %>
+          <% if buttons.include?(:back) %>
+            <%= link_to 'Back', pages_path, class: "btn btn-warning btn-small" %>
+          <% end %>
+        </div>
+      </fieldset>
+    </div>
+    <div class="span9">
+      <h4><%= f.label :content %></h4>
+      <%= f.text_area :content, class: "redactor" %>
+    </div>
   </div>
 <% end %>
+ 

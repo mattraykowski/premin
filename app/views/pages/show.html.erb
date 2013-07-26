@@ -5,8 +5,9 @@
   <div class="span9">
     <h3><%= @page.title %></h3>
     <div class="span12"><%= @page.content.html_safe %></div>
-    <%= link_to 'Edit', edit_page_path(@page) %> |
-    <%= link_to 'Back', pages_path %>
+    <% if user_signed_in? && current_user.is_site_admin %>
+      <%= link_to 'Edit', edit_page_path(@page), class: "btn btn-small btn-warning" %>
+    <% end %>
   </div>
 </div>
 

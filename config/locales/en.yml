@@ -5,3 +5,7 @@ en:
   hello: "Hello world"
   user:
     account: "Subdomain"
+  helpers:
+    submit:
+      page:
+        update: "Save"
