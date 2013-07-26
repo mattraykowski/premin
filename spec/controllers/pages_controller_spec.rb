@@ -1,76 +1,8 @@
 require 'spec_helper'
 
 describe PagesController do
-
-  let(:valid_attributes) { {  } }
-
-  let(:valid_session) { {} }
-
-  describe "when there is no subdomain" do
-    describe "GET index" do
-      it "should redirect to cusomters with flash notice" do
-        get :index, {}
-        subject.should redirect_to customers_path
-      end
-    end
-    describe "GET show" do
-      it "should redirect to cusomters with flash notice" do
-        page = FactoryGirl.create(:page)
-        get :show, { id: page.to_param }
-        subject.should redirect_to customers_path
-      end
-    end
-    describe "GET new" do
-      it "should redirect to cusomters with flash notice" do
-        get :new, {}
-        subject.should redirect_to customers_path
-      end
-    end
-    describe "GET edit" do
-      it "should redirect to cusomters with flash notice" do
-        page = FactoryGirl.create(:page)
-        get :edit, { id: page.to_param }
-        subject.should redirect_to customers_path
-      end
-    end
-    describe "POST create" do
-      it "should redirect to cusomters with flash notice" do
-        post :create, { page: FactoryGirl.attributes_for(:page) }
-        subject.should redirect_to customers_path
-      end
-    end
-    describe "PUT update" do
-      it "should redirect to cusomters with flash notice" do
-        page = FactoryGirl.create(:page)
-        put :update, {id: page.to_param, account: { "title" => "foobar" }}
-        subject.should redirect_to customers_path
-      end
-    end
-    describe "DELETE destroy" do
-      it "should redirect to cusomters with flash notice" do
-        page = FactoryGirl.create(:page)
-        delete :destroy, { id: page.to_param }
-        subject.should redirect_to customers_path
-      end
-    end
-  end
-
-  shared_context "create valid page" do
-    login_create_user(:user)
-    let(:host) { "#{@user.account.subdomain}.example.com" }
-    before(:each) do
-      @page = FactoryGirl.create(:page)
-      @page.account = @user.account
-      @page.save
-      @request.host = host
-    end
-  end
-
-  shared_context "set request host" do
-    login_create_user(:user)
-    let(:host) { "#{@user.account.subdomain}.example.com" }
-    before { @request.host = host }
-  end
+  it_should_behave_like "a controller requiring authentication", :page, [:show]
+  it_should_behave_like "a controller requiring account subdomain", :page, :customers_path
 
   describe "when there is a subdomain" do
     describe "GET index" do
