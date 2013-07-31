@@ -40,7 +40,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   gem 'compass-rails'
-  gem 'bootstrap-sass'
+  gem 'bootstrap-sass', :git => 'git://github.com/thomas-mcdonald/bootstrap-sass.git', :branch => '3'
 end
 
 gem 'redactor-rails'
