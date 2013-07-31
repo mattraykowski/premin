@@ -1,5 +1,5 @@
-        <div class="row-fluid">
-          <div class="span10">
+        <div class="row">
+          <div class="col-10">
             <h4><%= course.name %></h4>
             <dl>
               <dt>Class Shedule<dt>
@@ -10,13 +10,13 @@
               <dd><%= course.tuition_description %></dd>
             </dl>
           </div>
-          <div class="span2">
+          <div class="col-2">
             <% if user_signed_in? && current_user.is_site_admin == true %>
             <div class="panel">
               <div class="panel-heading">Actions</div>
               <div class="btn-group">
-                <%= link_to raw('<i class="icon-eye-open"></i>'), course, class: "btn btn-mini" %>
-                <%= link_to raw('<i class="icon-edit"></i>'), edit_course_path(course), class: "btn btn-mini" %>
+                <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'), course, class: "btn btn-default btn-mini" %>
+                <%= link_to raw('<i class="icon-edit"></i>'), edit_course_path(course), class: "btn btn-default" %>
                 <%= link_to raw('<i class="icon-remove"></i>'), course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %>
                 <%= link_to raw('<i class="icon-plus"></i>'), new_course_path, class: "btn btn-mini btn-success" %>
               </div>
@@ -24,8 +24,8 @@
             <% end %> <!-- is site admin -->
           </div>
         </div>
-        <div class="row-fluid">
-          <div class="span12">
+        <div class="row">
+          <div class="col-12">
             <p class="lead">Course Description</p>
             <%= course.long_description.html_safe %>
           </div>
