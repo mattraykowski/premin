@@ -18,6 +18,7 @@ Premin::Application.routes.draw do
     end
     match "/" => "dashboard#public"
     resources :pages
+    resources :courses
   end
 
   root :to => 'home#index'

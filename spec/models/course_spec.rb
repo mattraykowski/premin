@@ -23,4 +23,6 @@ describe Course do
     before { @course.account = nil }
     it { should_not be_valid }
   end
+
+  it_should_behave_like "a model supporting by_account", :page, Page, @account
 end

@@ -28,7 +28,21 @@ shared_context "create valid page" do
   end
 end
 
+shared_context "create valid course" do
+  login_create_user(:user)
+  let(:host) { "#{@user.account.subdomain}.example.com" }
+  before(:each) do
+    @course = FactoryGirl.create(:course, account: @user.account)
+    @request.host = host
+  end
+end  
+
 shared_context "basic redirect tests" do
+  before(:each) do
+    @extra_attribs = {}
+    @extra_attribs = { account: @account } if requires_account 
+  end
+
   describe "GET index" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:index)
@@ -40,7 +54,7 @@ shared_context "basic redirect tests" do
   describe "GET show" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:show)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         get :show, { id: object.to_param }
         subject.should redirect_to send(redirect_path)
       end
@@ -57,7 +71,7 @@ shared_context "basic redirect tests" do
   describe "GET edit" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:edit)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         get :edit, { id: object.to_param }
         subject.should redirect_to send(redirect_path)
       end
@@ -74,7 +88,7 @@ shared_context "basic redirect tests" do
   describe "PUT update" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:update)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         put :update, {id: object.to_param, object_symbol => { "doesntmatter" => "foobar" }}
         subject.should redirect_to send(redirect_path)
       end
@@ -83,7 +97,7 @@ shared_context "basic redirect tests" do
   describe "DELETE destroy" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:destroy)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         delete :destroy, { id: object.to_param }
         subject.should redirect_to send(redirect_path)
       end
@@ -96,8 +110,12 @@ end
 # Shared examples to DRY up common tests #
 #                                        #
 ##########################################
-shared_examples "a controller requiring authentication" do |object_symbol, skip_actions|
+shared_examples "a controller requiring authentication" do |object_symbol, skip_actions, requires_account=false|
   include_context "create empty account request"
+  before(:each) do
+    @extra_attribs = {}
+    @extra_attribs = { account: @account } if requires_account 
+  end
 
   describe "GET index" do
     it "should redirect to login" do
@@ -118,7 +136,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
   describe "GET show" do
     it "should redirect to login" do
       unless skip_actions.include?(:show)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         get :show, { id: object.to_param }
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
@@ -127,7 +145,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
   describe "GET edit" do
     it "should redirect to login" do
       unless skip_actions.include?(:edit)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         get :edit, { id: object.to_param }
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
@@ -144,7 +162,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
   describe "PUT update" do
     it "should redirect to login" do
       unless skip_actions.include?(:update)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         put :update, {id: object.to_param, object_symbol => { "doesntmatter" => "foobar" }}
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
@@ -153,7 +171,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
   describe "DELETE destroy" do
     it "should redirect to login" do
       unless skip_actions.include?(:destroy)
-        object = FactoryGirl.create(object_symbol)
+        object = FactoryGirl.create(object_symbol, @extra_attribs)
         delete :destroy, { id: object.to_param }
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
@@ -162,18 +180,22 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
 end
 
 
-shared_examples "a controller requiring account subdomain" do |object_symbol, redirect_path, skip_actions=[]|
+shared_examples "a controller requiring account subdomain" do |object_symbol, redirect_path, skip_actions=[], requires_account=false|
   login_create_user(:user)
   let(:object_symbol) { object_symbol }
   let(:redirect_path) { redirect_path }
   let(:skip_actions) { skip_actions }
+  let(:requires_account) { requires_account }
+  before { @account = @user.account }
   include_context "basic redirect tests"
 end
 
-shared_examples "a controller requiring site admin access" do |object_symbol, redirect_path, skip_actions=[]|
+shared_examples "a controller requiring site admin access" do |object_symbol, redirect_path, skip_actions=[], requires_account=false|
   before { @user.update_attribute(:is_site_admin,  false) }
+  before { @account = @user.account }
   let(:object_symbol) { object_symbol }
   let(:redirect_path) { redirect_path }
   let(:skip_actions) { skip_actions }
+  let(:requires_account) { requires_account }
   include_context "basic redirect tests"
 end

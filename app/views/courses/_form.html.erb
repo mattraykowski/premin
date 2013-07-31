@@ -1,0 +1,46 @@
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row-fluid">
+    <div class="span3">
+      <fieldset>
+        <legend><%= f.label :name %></legend>
+        <%= f.text_field :name, class: "input-xlarge", placeholder: "e.g. 'Butterflies' or 'M-F Mornings'" %>
+        <legend><%= f.label :age_group %></legend>
+        <%= f.text_field :age_group, class: "input-xlarge", placeholder: "Ages 3-5" %>
+
+        <legend><%= f.label :days_description %></legend>
+        <%= f.text_field :days_description, class: "input-xlarge", placeholder: "Monday through Friday" %>
+
+        <legend><%= f.label :class_time_description %></legend>
+        <%= f.text_field :class_time_description, class: "input-xlarge", placeholder: "9am to 11am" %>
+
+        <legend><%= f.label :tuition_description %></legend>
+        <%= f.text_field :tuition_description, class: "input-xlarge", placeholder: "$130/month" %>
+
+        <div class="btn-group">
+          <%= f.submit class: "btn btn-success btn-small" %>
+          <% if buttons.include?(:show) %>
+            <%= link_to 'Show', @course, class: "btn btn-primary btn-small" %>
+          <% end %>
+          <% if buttons.include?(:back) %>
+            <%= link_to 'Back', courses_path, class: "btn btn-warning btn-small" %>
+          <% end %>
+        </div>
+      </fieldset>
+    </div>
+    <div class="span9">
+      <h4><%= f.label :long_description %></h4>
+      <%= f.text_area :long_description, class: "redactor" %>
+    </div>
+  </div>
+<% end %>

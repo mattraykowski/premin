@@ -5,4 +5,6 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: true
   validates :account, presence: true
+
+  scope :by_account, lambda { |acct| where("courses.account_id = ?", acct.id) }
 end

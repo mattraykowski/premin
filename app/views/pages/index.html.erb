@@ -10,7 +10,7 @@
 <% @pages.each do |page| %>
   <tr>
     <td><%= page.title %></td>
-    <td><%= page.sidebar %></td>
+    <td><%= raw('<i class="icon-ok"></i>') if page.sidebar %></td>
     <td>
       <div class="btn-group">
         <%= link_to raw('<i class="icon-eye-open"></i>'), page, class: "btn btn-mini" %>

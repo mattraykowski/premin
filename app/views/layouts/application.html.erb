@@ -26,6 +26,7 @@
         <%= link_to "Premin", root_path, class: "brand" %>
         <ul class="nav pull-left">
           <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Courses", courses_path %></li>
           <!-- Begin: Admin Menu -->
           <% if user_signed_in? && current_user.is_site_admin %>
           <li class="dropdown">

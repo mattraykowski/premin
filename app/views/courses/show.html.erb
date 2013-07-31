@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<div class="btn-group">
+  <%= link_to 'Edit', edit_course_path(@course), class: "btn btn-small btn-warning" %>
+  <%= link_to 'Back', courses_path, class: "btn btn-small btn-primary" %>
+</div>
+
+<%= render partial: "single_content", locals: { course: @course } %>

@@ -1,0 +1,18 @@
+<h1>Listing courses</h1>
+
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <% @courses.each_with_index do |course, index| %>
+      <li <%= 'class=active' if index==0%>><a href="#course<%= index.to_s %>" data-toggle="tab"><%= course.name %></a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <% @courses.each_with_index do |course, index| %>
+      <div id="course<%= index.to_s %>" class="tab-pane <%= 'active' if index==0 %>">
+        <%= render partial: "single_content", locals: { course: course } %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
