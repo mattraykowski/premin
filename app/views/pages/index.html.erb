@@ -4,18 +4,18 @@
   <tr>
     <th>Title</th>
     <th>Sidebar</th>
-    <th width="45">Actions</th>
+    <th width="80">Actions</th>
   </tr>
 
 <% @pages.each do |page| %>
   <tr>
     <td><%= page.title %></td>
-    <td><%= raw('<i class="icon-ok"></i>') if page.sidebar %></td>
+    <td><%= raw('<i class="glyphicon glyphicon-ok"></i>') if page.sidebar %></td>
     <td>
-      <div class="btn-group">
-        <%= link_to raw('<i class="icon-eye-open"></i>'), page, class: "btn btn-mini" %>
-        <%= link_to raw('<i class="icon-edit"></i>'), edit_page_path(page), class: "btn btn-mini" %>
-        <%= link_to raw('<i class="icon-remove"></i>'), page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini" %>
+      <div class="btn-group btn-group-justified">
+        <%= link_to raw('<i class="glyphicon glyphicon-eye-open"></i>'), page, class: "btn btn-default btn-small" %>
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_page_path(page), class: "btn btn-default btn-small" %>
+        <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-small" %>
       </div>
     </td>
   </tr>

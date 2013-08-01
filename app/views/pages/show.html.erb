@@ -1,10 +1,10 @@
-<div class="row-fluid">
-  <div class="span3">
+<div class="row">
+  <div class="col-3">
     <%= render partial: "shared/page_sidebar", locals: { page_collection: @sidebar_pages } %>
   </div>
-  <div class="span9">
+  <div class="col-9">
     <h3><%= @page.title %></h3>
-    <div class="span12"><%= @page.content.html_safe %></div>
+    <div class="col-12"><%= @page.content.html_safe %></div>
     <% if user_signed_in? && current_user.is_site_admin %>
       <%= link_to 'Edit', edit_page_path(@page), class: "btn btn-small btn-warning" %>
     <% end %>

@@ -10,8 +10,8 @@
       </ul>
     </div>
   <% end %>
-  <div class="row-fluid">
-    <div class="span3">
+  <div class="row">
+    <div class="col-3">
       <fieldset>
         <legend><%= f.label :title %></legend>
         <%= f.text_field :title, class: "input-xlarge" %>
@@ -30,7 +30,7 @@
         </div>
       </fieldset>
     </div>
-    <div class="span9">
+    <div class="col-9">
       <h4><%= f.label :content %></h4>
       <%= f.text_area :content, class: "redactor" %>
     </div>
