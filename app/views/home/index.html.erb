@@ -5,3 +5,18 @@
     </div>
   <% end %>
 <% end %>
+
+<div class="well">
+  <h1>Premin <small>next generation preschool management</small></h1>
+  <h3>Coming soon!</h3>
+  <p>If you're interested in receiving more information about Premin or being informed as to when our service is available to the public please send us your email and we'll send you one back!</p>
+  <%= form_tag create_mailinglist_subscription_path do %>
+  <div class="input-group">
+    <span class="input-group-addon">@</span>
+    <%= text_field_tag 'email', nil, class: "form-control", placeholder: "me@example.com" %>
+  </div>
+  <center><%= submit_tag "Keep Me Posted!", class: "btn btn-success" %></center>
+  <% end %>
+</div>
+
+<h1>Latest News</h1>

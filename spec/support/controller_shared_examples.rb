@@ -40,13 +40,17 @@ end
 shared_context "basic redirect tests" do
   before(:each) do
     @extra_attribs = {}
-    @extra_attribs = { account: @account } if requires_account 
+    @extra_attribs.merge!({ course: @course}) if requires_course
+    @extra_attribs.merge!({ account: @account }) if requires_account 
+
+    @path_attribs = {}
+    @path_attribs.merge!({ course_id: @course.id}) if requires_course
   end
 
   describe "GET index" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:index)
-        get :index, {}
+        get :index, { }.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -55,7 +59,7 @@ shared_context "basic redirect tests" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:show)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        get :show, { id: object.to_param }
+        get :show, { id: object.to_param }.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -63,7 +67,7 @@ shared_context "basic redirect tests" do
   describe "GET new" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:new)
-        get :new, {}
+        get :new, {}.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -72,7 +76,7 @@ shared_context "basic redirect tests" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:edit)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        get :edit, { id: object.to_param }
+        get :edit, { id: object.to_param }.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -80,7 +84,7 @@ shared_context "basic redirect tests" do
   describe "POST create" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:create)
-        post :create, { object_symbol => FactoryGirl.attributes_for(object_symbol) }
+        post :create, { object_symbol => FactoryGirl.attributes_for(object_symbol) }.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -89,7 +93,7 @@ shared_context "basic redirect tests" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:update)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        put :update, {id: object.to_param, object_symbol => { "doesntmatter" => "foobar" }}
+        put :update, {id: object.to_param, object_symbol => { "doesntmatter" => "foobar" }}.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -98,7 +102,7 @@ shared_context "basic redirect tests" do
     it "should redirect with flash notice" do
       unless skip_actions.include?(:destroy)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        delete :destroy, { id: object.to_param }
+        delete :destroy, { id: object.to_param }.merge!(@path_attribs)
         subject.should redirect_to send(redirect_path)
       end
     end
@@ -110,17 +114,20 @@ end
 # Shared examples to DRY up common tests #
 #                                        #
 ##########################################
-shared_examples "a controller requiring authentication" do |object_symbol, skip_actions, requires_account=false|
-  include_context "create empty account request"
+shared_examples "a controller requiring authentication" do |object_symbol, skip_actions, requires_account=false, requires_course=false|
   before(:each) do
     @extra_attribs = {}
-    @extra_attribs = { account: @account } if requires_account 
+    @extra_attribs.merge!({ course: @course}) if requires_course
+    @extra_attribs.merge!({ account: @account }) if requires_account 
+
+    @path_attribs = {}
+    @path_attribs.merge!({ course_id: @course.id}) if requires_course
   end
 
   describe "GET index" do
     it "should redirect to login" do
       unless skip_actions.include?(:index)
-        get :index, {}
+        get :index, {}.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -128,7 +135,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
   describe "GET new" do
     it "should redirect to login" do
       unless skip_actions.include?(:new)
-        get :new, {}
+        get :new, {}.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -137,7 +144,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
     it "should redirect to login" do
       unless skip_actions.include?(:show)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        get :show, { id: object.to_param }
+        get :show, { id: object.to_param }.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -146,7 +153,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
     it "should redirect to login" do
       unless skip_actions.include?(:edit)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        get :edit, { id: object.to_param }
+        get :edit, { id: object.to_param }.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -154,7 +161,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
   describe "POST create" do
     it "should redirect to login" do
       unless skip_actions.include?(:create)
-        post :create, { object_symbol => FactoryGirl.attributes_for(object_symbol) }
+        post :create, { object_symbol => FactoryGirl.attributes_for(object_symbol) }.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -163,7 +170,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
     it "should redirect to login" do
       unless skip_actions.include?(:update)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        put :update, {id: object.to_param, object_symbol => { "doesntmatter" => "foobar" }}
+        put :update, {id: object.to_param, object_symbol => { "doesntmatter" => "foobar" }}.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -172,7 +179,7 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
     it "should redirect to login" do
       unless skip_actions.include?(:destroy)
         object = FactoryGirl.create(object_symbol, @extra_attribs)
-        delete :destroy, { id: object.to_param }
+        delete :destroy, { id: object.to_param }.merge!(@path_attribs)
         subject.should redirect_to new_user_session_path(subdomain: @account.subdomain)
       end
     end
@@ -180,22 +187,24 @@ shared_examples "a controller requiring authentication" do |object_symbol, skip_
 end
 
 
-shared_examples "a controller requiring account subdomain" do |object_symbol, redirect_path, skip_actions=[], requires_account=false|
+shared_examples "a controller requiring account subdomain" do |object_symbol, redirect_path, skip_actions=[], requires_account=false,requires_course=false|
   login_create_user(:user)
   let(:object_symbol) { object_symbol }
   let(:redirect_path) { redirect_path }
   let(:skip_actions) { skip_actions }
   let(:requires_account) { requires_account }
+  let(:requires_course) { requires_course }
   before { @account = @user.account }
   include_context "basic redirect tests"
 end
 
-shared_examples "a controller requiring site admin access" do |object_symbol, redirect_path, skip_actions=[], requires_account=false|
+shared_examples "a controller requiring site admin access" do |object_symbol, redirect_path, skip_actions=[], requires_account=false, requires_course=false|
   before { @user.update_attribute(:is_site_admin,  false) }
   before { @account = @user.account }
   let(:object_symbol) { object_symbol }
   let(:redirect_path) { redirect_path }
   let(:skip_actions) { skip_actions }
   let(:requires_account) { requires_account }
+  let(:requires_course) { requires_course }
   include_context "basic redirect tests"
 end

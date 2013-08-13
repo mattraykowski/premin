@@ -1,0 +1,5 @@
+<h1>New Course Session</h1>
+
+<%= form_for [@course, @course_session], url: course_course_sessions_path do |f| %>
+  <%= render partial: 'form', locals: { f: f, buttons: [:back] } %>
+<% end %>

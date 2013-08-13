@@ -11,6 +11,8 @@ Premin::Application.routes.draw do
   match "/contact" => "home#contact"
   match "/oops" => "home#oops"
   match "/news" => "home#news"
+  post "/subscribe" => "mailing_list#create", as: :create_mailinglist_subscription
+
 
   constraints(Subdomain) do
     authenticated :user do
@@ -18,7 +20,9 @@ Premin::Application.routes.draw do
     end
     match "/" => "dashboard#public"
     resources :pages
-    resources :courses
+    resources :courses do
+      resources :course_sessions
+    end
   end
 
   root :to => 'home#index'

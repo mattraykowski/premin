@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.by_account(@current_account)
+    @course_index = params[:crs].nil? ? 0 : params[:crs].to_i
 
     respond_to do |format|
       format.html # index.html.erb

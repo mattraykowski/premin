@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe PagesController do
-  it_should_behave_like "a controller requiring authentication", :page, [:show]
+  describe "authentication" do
+    include_context "create empty account request"
+    it_should_behave_like "a controller requiring authentication", :page, [:show]
+  end
   it_should_behave_like "a controller requiring account subdomain", :page, :customers_path
 
   describe "when there is a subdomain" do

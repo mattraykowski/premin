@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726202005) do
+ActiveRecord::Schema.define(:version => 20130805130412) do
 
   create_table "accounts", :force => true do |t|
     t.string   "subdomain"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(:version => 20130726202005) do
     t.integer  "user_id"
     t.string   "name"
   end
+
+  create_table "course_sessions", :force => true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "status"
+    t.integer  "total_capacity"
+    t.integer  "waitlist_capacity"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "course_sessions", ["course_id"], :name => "index_course_sessions_on_course_id"
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -32,6 +44,15 @@ ActiveRecord::Schema.define(:version => 20130726202005) do
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
+
+  create_table "mailing_lists", :force => true do |t|
+    t.string   "email"
+    t.boolean  "subscribed", :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "mailing_lists", ["email"], :name => "index_mailing_lists_on_email", :unique => true
 
   create_table "pages", :force => true do |t|
     t.string   "title"

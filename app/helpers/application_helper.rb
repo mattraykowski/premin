@@ -6,4 +6,14 @@ module ApplicationHelper
     when :alert then "warning"
     end
   end
+
+  def session_status_class(status)
+    case status
+    when CourseSession::PENDING then "warning"
+    when CourseSession::OPEN then "success"
+    when CourseSession::WAITLIST then "warning"
+    when CourseSession::FULL then "danger"
+    when CourseSession::CLOSED then "danger"
+    end
+  end
 end

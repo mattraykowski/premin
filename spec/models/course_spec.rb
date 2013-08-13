@@ -13,6 +13,7 @@ describe Course do
   it { should respond_to(:days_description) }
   it { should respond_to(:long_description) }
   it { should respond_to(:tuition_description) }
+  it { should respond_to(:course_sessions) }
 
   describe "when name is not present" do
     before { @course.name = " " }

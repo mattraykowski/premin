@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe CoursesController do
   describe "authentication" do
+    include_context "create empty account request"
     it_should_behave_like "a controller requiring authentication", :course, [:show, :index], true
   end
   describe "subdomain" do

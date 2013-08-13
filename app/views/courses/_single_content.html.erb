@@ -12,8 +12,9 @@
           </div>
           <div class="col-5">
             <div class="panel">
-              <div class="panel-heading"><strong>Available Sessions</strong></div>
-              <!-- TODO - this is only mocked. -->
+              <div class="panel-heading"><strong>Available Sessions</strong>
+                <small><%= link_to 'New Session', new_course_course_session_path(course) %></small>
+              </div>
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -23,6 +24,20 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <% course.course_sessions.each do |session| %>
+                  <tr class="<%= session_status_class(session.status) %>">
+                    <td><%= session.name %></td>
+                    <!-- TODO - this is only mocked. -->
+                    <td><a href="#" class="btn btn-small btn-default">View</a></td>
+                    <td><%= session.status_description %></td>
+                  </tr>
+                  <% end %>
+                  <% if course.course_sessions.empty? %>
+                  <tr>
+                    <td colspan="3"><%= link_to 'New Course Session', new_course_course_session_path(course), class: "btn btn-small btn-success" %></td>
+                  </tr>
+                  <% end %>
+                  <!--
                   <tr class="danger">
                     <td>Spring 2013</td>
                     <td><a href="#" class="btn btn-small btn-default">View</a></td>
@@ -37,7 +52,7 @@
                     <td>Fall 2013</td>
                     <td><a href="#" class="btn btn-small btn-default">View</a></td>
                     <td>Open</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
