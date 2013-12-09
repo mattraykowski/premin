@@ -1,5 +1,5 @@
         <div class="row">
-          <div class="col-4">
+          <div class="col-lg-4">
             <h4><%= course.name %></h4>
             <dl>
               <dt>Class Shedule<dt>
@@ -10,7 +10,7 @@
               <dd><%= course.tuition_description %></dd>
             </dl>
           </div>
-          <div class="col-5">
+          <div class="col-lg-5">
             <div class="panel">
               <div class="panel-heading"><strong>Available Sessions</strong>
                 <small><%= link_to 'New Session', new_course_course_session_path(course) %></small>
@@ -28,13 +28,13 @@
                   <tr class="<%= session_status_class(session.status) %>">
                     <td><%= session.name %></td>
                     <!-- TODO - this is only mocked. -->
-                    <td><a href="#" class="btn btn-small btn-default">View</a></td>
+                    <td><a href="#" class="btn btn-xs btn-default">View</a></td>
                     <td><%= session.status_description %></td>
                   </tr>
                   <% end %>
                   <% if course.course_sessions.empty? %>
                   <tr>
-                    <td colspan="3"><%= link_to 'New Course Session', new_course_course_session_path(course), class: "btn btn-small btn-success" %></td>
+                    <td colspan="3"><%= link_to 'New Course Session', new_course_course_session_path(course), class: "btn btn-sm btn-success" %></td>
                   </tr>
                   <% end %>
                   <!--
@@ -57,22 +57,22 @@
               </table>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3">
             <% if user_signed_in? && current_user.is_site_admin == true %>
             <div class="panel">
               <div class="panel-heading">Actions</div>
               <div class="btn-group btn-group-justified">
-                <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'), course, class: "btn btn-default btn-small" %>
-                <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_course_path(course), class: "btn btn-small btn-default" %>
-                <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-small btn-danger" %>
-                <%= link_to raw('<i class="glyphicon glyphicon-plus"></i>'), new_course_path, class: "btn btn-small btn-success" %>
+                <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'), course, class: "btn btn-default btn-sm" %>
+                <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_course_path(course), class: "btn btn-sm btn-default" %>
+                <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+                <%= link_to raw('<i class="glyphicon glyphicon-plus"></i>'), new_course_path, class: "btn btn-sm btn-success" %>
               </div>
             </div>
             <% end %> <!-- is site admin -->
           </div>
         </div>
         <div class="row">
-          <div class="col-12">
+          <div class="col-lg-12">
             <div class="panel">
               <div class="panel-heading"><strong>Course Description</strong></div>
               <%= course.long_description.html_safe %>

@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3">
       <fieldset>
         <legend><%= f.label :title %></legend>
         <%= f.text_field :title, class: "input-xlarge" %>
@@ -20,17 +20,17 @@
           <%= f.label :sidebar %>
         </label>
         <div class="btn-group">
-          <%= f.submit class: "btn btn-success btn-small" %>
+          <%= f.submit class: "btn btn-success btn-sm" %>
           <% if buttons.include?(:show) %>
-            <%= link_to 'Show', @page, class: "btn btn-primary btn-small" %>
+            <%= link_to 'Show', @page, class: "btn btn-primary btn-sm" %>
           <% end %>
           <% if buttons.include?(:back) %>
-            <%= link_to 'Back', pages_path, class: "btn btn-warning btn-small" %>
+            <%= link_to 'Back', pages_path, class: "btn btn-warning btn-sm" %>
           <% end %>
         </div>
       </fieldset>
     </div>
-    <div class="col-9">
+    <div class="col-lg-9">
       <h4><%= f.label :content %></h4>
       <%= f.text_area :content, class: "redactor" %>
     </div>

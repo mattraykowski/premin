@@ -2,14 +2,14 @@
 
 
 <div class="row">
-  <div class="col-2">
+  <div class="col-lg-2">
     <ul class="nav nav-pills nav-stacked">
       <% @courses.each_with_index do |course, index| %>
         <li <%= 'class=active' if index == @course_index %>><a href="#course<%= index.to_s %>" data-toggle="pill"><%= course.name %></a></li>
       <% end %>
     </ul>
   </div>
-  <div class="col-10">
+  <div class="col-lg-10">
     <div class="pill-content">
       <% @courses.each_with_index do |course, index| %>
         <div id="course<%= index.to_s %>" class="pill-pane <%= 'active' if index == @course_index %>">

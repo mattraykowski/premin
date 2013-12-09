@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-lg-12">
       <div class="form-group">
         <label><%= f.label :name %></label>
         <%= f.text_field :name, class: "form-control input-large", placeholder: "Session name..." %>
@@ -19,19 +19,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="form-group">
         <label><%= f.label :status %></label>
         <%= f.select :status, CourseSession::STATUSES.map{|h| [ h[1], h[0] ]}, {}, class: "form-control" %> 
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="form-group">
         <label><%= f.label :total_capacity %></label>
         <%= f.text_field :total_capacity, class: "form-control" %>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="form-group">
         <label><%= f.label :waitlist_capacity %></label>
         <%= f.text_field :waitlist_capacity, class: "form-control" %>
@@ -40,14 +40,14 @@
   </div>
   <div class="row">
 
-    <div class="col-4 col-offset-4">    
+    <div class="col-lg-4 col-lg-offset-4">
       <div class="btn-group">
-        <%= f.submit class: "btn btn-success btn-small" %>
+        <%= f.submit class: "btn btn-success btn-sm" %>
         <% if buttons.include?(:show) %>
-          <%= link_to 'Show', @course_session, class: "btn btn-primary btn-small" %>
+          <%= link_to 'Show', @course_session, class: "btn btn-primary btn-sm" %>
         <% end %>
         <% if buttons.include?(:back) %>
-          <%= link_to 'Back', course_course_sessions_path(@course), class: "btn btn-warning btn-small" %>
+          <%= link_to 'Back', course_course_sessions_path(@course), class: "btn btn-warning btn-sm" %>
         <% end %>
       </div>
     </div>

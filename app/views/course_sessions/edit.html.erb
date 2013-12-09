@@ -1,7 +1,7 @@
 <h1>Editing course_session</h1>
 
 <%= form_for [@course, @course_session], url: course_course_sessions_path(@course_session) do |f| %>
-  <%= render partial: 'form', , locals: { f: f } %>
+  <%= render partial: 'form', locals: { f: f } %>
 <% end %>
 
 <%= link_to 'Show', @course_session %> |

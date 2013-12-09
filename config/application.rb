@@ -60,6 +60,9 @@ module Premin
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Include Bower components in compiled assets.
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+
     config.allow_account_sign_up = true
   end
 end

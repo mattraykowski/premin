@@ -76,6 +76,8 @@ Devise.setup do |config|
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
   config.skip_session_storage = [:http_auth]
 
+  config.secret_key = '4e7cdb4ee5afdfa0df60881bf1da4d0c1971ce53f5c3c59c4ccd053f267a596a19e441196f533340484a017e9effac81977d6da5bd8fa80042ed402349e10945'
+
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.

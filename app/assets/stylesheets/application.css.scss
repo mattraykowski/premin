@@ -10,10 +10,12 @@
  *
  *= require_self
  *= require redactor-rails
- *= require_tree .
+ *= require bootstrap/dist/css/bootstrap.css
+ *= require bootstrap/dist/css/bootstrap-theme.css
+ *= require jquery-ui/themes/base/jquery.ui.all.css
+ *= require select2/select2.css
  */
-@import "bootstrap";
-@import "bootstrap/glyphicons";
+
 .nav-pills.red > .active > a, .nav-pills.red > .active > a:hover, , .nav-pills.red > .active > a:focus {
   background-color: red;
 }

@@ -4,7 +4,7 @@
   <tr>
     <th>Title</th>
     <th width="35">Sidebar</th>
-    <th width="80">Actions</th>
+    <th width="100">Actions</th>
   </tr>
 
 <% @pages.each do |page| %>
@@ -13,9 +13,9 @@
     <td><%= raw('<i class="glyphicon glyphicon-ok"></i>') if page.sidebar %></td>
     <td>
       <div class="btn-group btn-group-justified">
-        <%= link_to raw('<i class="glyphicon glyphicon-eye-open"></i>'), page, class: "btn btn-default btn-small" %>
-        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_page_path(page), class: "btn btn-default btn-small" %>
-        <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-small" %>
+        <%= link_to raw('<i class="glyphicon glyphicon-eye-open"></i>'), page, class: "btn btn-default btn-xs" %>
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_page_path(page), class: "btn btn-default btn-xs" %>
+        <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %>
       </div>
     </td>
   </tr>
